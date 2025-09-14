@@ -2,14 +2,36 @@ import { describe, it, expect } from "vitest"
 import { SynthesizerBuilder } from "../../src/builders/SynthesizerBuilder"
 import { ApiSynthesizer } from "../../src/core/api/ApiSynthesizer.type"
 import { ApiModule } from "../../src/core/api/ApiModule.type"
+import { MonophonicNode, PolyphonicNode } from "../../src/core/business/ModuleNode.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
     const fetcher: () => Promise<ApiSynthesizer> = async () => {
       return { id: "synth-id", name: "synth name", voices: 16 }
     }
+    const monophonicNode: MonophonicNode = {
+      polyphonic: false,
+      name: 'test-mono',
+      generator: 'createGain',
+      id: 'mono-id'
+    }
+    const polyphonicNode: PolyphonicNode = {
+      audioNodes: [],
+      polyphonic: true,
+      name: 'test-poly',
+      generator: 'createGain',
+      id: 'poly-id'
+    }
     const modulesFetcher: () => Promise<ApiModule[]> = async () => {
-      return [{ id: "module-id", rack: 0, slot: 0, slots: 2, type: "VCO" }]
+      return [{
+        id: "module-id",
+        rack: 0,
+        slot: 0,
+        slots: 2,
+        type: "VCO",
+        nodes: [monophonicNode, polyphonicNode],
+        links: []
+      }]
     }
     const synthesizer = await SynthesizerBuilder(fetcher(), modulesFetcher())
 
@@ -28,6 +50,41 @@ describe("SynthesizerBuilder", () => {
 
       it("Has created a module with the correct ID", () => {
         expect(module.id).toEqual("module-id")
+      })
+
+      describe("Nodes", () => {
+        describe("Mono", () => {
+          const node = module.nodes[0]
+
+          it("Has the correct UUID", () => {
+            expect(node.id).toEqual("mono-id")
+          })
+          it("Is monophonic", () => {
+            expect(node.polyphonic).toBeFalsy()
+          })
+          it("Has the correct name", () => {
+            expect(node.name).toEqual("test-mono")
+          })
+          it("Points to the right generator", () => {
+            expect(node.generator).toEqual("createGain")
+          })
+        })
+        describe("Poly", () => {
+          const node = module.nodes[1]
+
+          it("Has the correct UUID", () => {
+            expect(node.id).toEqual("poly-id")
+          })
+          it("Is monophonic", () => {
+            expect(node.polyphonic).toBeTruthy()
+          })
+          it("Has the correct name", () => {
+            expect(node.name).toEqual("test-poly")
+          })
+          it("Points to the right generator", () => {
+            expect(node.generator).toEqual("createGain")
+          })
+        })
       })
     })
   })
