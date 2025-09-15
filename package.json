@@ -1,15 +1,17 @@
 {
-  "name": "@synple/audio",
-  "type": "module",
-  "version": "1.0.0",
+  "name": "@synple/core",
+  "version": "1.1.0",
   "description": "",
   "files": [
     "dist"
   ],
+  "types": "dist/index.d.ts",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "scripts": {
     "build": "rm -rf ./dist/* && tsc",
-    "test:browser": "vitest"
+    "test:browser": "vitest",
+    "build:next": "rm -rf dist/ && tsup src/index.ts --format cjs,esm --dts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,7 @@
   "devDependencies": {
     "@types/node": "^24.3.0",
     "@vitest/browser": "^3.2.4",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.2",
     "webdriverio": "^9.19.2"
   },
