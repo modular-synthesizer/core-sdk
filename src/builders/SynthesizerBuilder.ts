@@ -10,8 +10,7 @@ export async function SynthesizerBuilder(
   request: Promise<ApiSynthesizer>,
   modulesRequest: Promise<ApiModule[]>
 ): Promise<Synthesizer> {
-  const data: ApiSynthesizer = await request;
-  const apiModules: ApiModule[] = await modulesRequest;
+  const [data, apiModules] = await Promise.all([request, modulesRequest])
   const modules = apiModules.map(ModuleFactory)
 
   const results: Synthesizer = {

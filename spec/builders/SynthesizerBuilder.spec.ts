@@ -31,7 +31,7 @@ describe("SynthesizerBuilder", () => {
         type: "VCO",
         nodes: [monophonicNode, polyphonicNode],
         links: [
-          { from: { node: "mono-id", index: 0 }, to: { node: "poly-id", index: 1 }, id: "link-id" }
+          { from: { node: "test-mono", index: 0 }, to: { node: "test-poly", index: 1 }, id: "link-id" }
         ],
         ports: [
           { id: "port-id", name: "port", index: 0, kind: "output", target: "test-poly" }
@@ -91,24 +91,44 @@ describe("SynthesizerBuilder", () => {
           })
         })
       })
-      describe("Ports", () => {
-        const port = synthesizer.ports["port-id"]
+      describe("Links", () => {
+        const link = module.links["link-id"]
 
         it("Has the correct UUID", () => {
-          expect(port.id).toEqual("port-id")
+          expect(link.id).toEqual("link-id")
         })
-        it("Has the correct name", () => {
-          expect(port.name).toEqual("port")
+        it("Has the correct start node", () => {
+          expect(link.from.node.name).toEqual("test-mono")
         })
-        it("Has the correct kind", () => {
-          expect(port.kind).toEqual('output')
+        it("Has the correct start index", () => {
+          expect(link.from.index).toEqual(0)
         })
-        it("Has the correct index", () => {
-          expect(port.index).toEqual(0)
+        it("Has the correct end node", () => {
+          expect(link.to.node.name).toEqual("test-poly")
         })
-        it("Has the correct target", () => {
-          expect(port.target.name).toEqual("test-poly")
+        it("Has the correct end index", () => {
+          expect(link.to.index).toEqual(1)
         })
+      })
+    })
+
+    describe("Ports", () => {
+      const port = synthesizer.ports["port-id"]
+
+      it("Has the correct UUID", () => {
+        expect(port.id).toEqual("port-id")
+      })
+      it("Has the correct name", () => {
+        expect(port.name).toEqual("port")
+      })
+      it("Has the correct kind", () => {
+        expect(port.kind).toEqual('output')
+      })
+      it("Has the correct index", () => {
+        expect(port.index).toEqual(0)
+      })
+      it("Has the correct target", () => {
+        expect(port.target.name).toEqual("test-poly")
       })
     })
   })
