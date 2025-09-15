@@ -3,6 +3,7 @@ import { SynthesizerBuilder } from "../../src/builders/SynthesizerBuilder"
 import { ApiSynthesizer } from "../../src/core/api/ApiSynthesizer.type"
 import { ApiModule } from "../../src/core/api/ApiModule.type"
 import { MonophonicNode, PolyphonicNode } from "../../src/core/business/ModuleNode.type"
+import { ApiCable } from "../../src/core/api/ApiCable.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
@@ -34,11 +35,17 @@ describe("SynthesizerBuilder", () => {
           { from: { node: "test-mono", index: 0 }, to: { node: "test-poly", index: 1 }, id: "link-id" }
         ],
         ports: [
-          { id: "port-id", name: "port", index: 0, kind: "output", target: "test-poly" }
+          { id: "port-id", name: "port", index: 0, kind: "output", target: "test-poly" },
+          { id: "input-id", name: "port", index: 0, kind: "input", target: "test-poly" }
         ]
       }]
     }
-    const synthesizer = await SynthesizerBuilder(fetcher(), modulesFetcher())
+    const cablesFetcher: () => Promise<ApiCable[]> = async () => {
+      return [
+        { id: 'cable-id', from: 'port-id', to: 'input-id', color: 'red' }
+      ]
+    }
+    const synthesizer = await SynthesizerBuilder(fetcher(), modulesFetcher(), cablesFetcher())
 
     it("Has the correct UUID from the data", () => {
       expect(synthesizer.id).toEqual("synth-id")
@@ -109,6 +116,20 @@ describe("SynthesizerBuilder", () => {
         it("Has the correct end index", () => {
           expect(link.to.index).toEqual(1)
         })
+      })
+    })
+
+    describe("Cables", () => {
+      const cable = synthesizer.cables[0]
+
+      it("Has the correct UUID", () => {
+        expect(cable.id).toEqual("cable-id")
+      })
+      it("Points to the correct origin", () => {
+        expect(cable.from.id).toEqual("port-id")
+      })
+      it("Points the the correct destination", () => {
+        expect(cable.to.id).toEqual("input-id")
       })
     })
 

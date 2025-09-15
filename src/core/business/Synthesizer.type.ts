@@ -9,6 +9,11 @@ export type Synthesizer = {
   // Modules are indexed on their UUID to make it easier to find
   modules: Record<string, Module>
   cables: Cable[]
-  // Ports are indexed on their names so that they can easily be accessed to (dis)connect a cable
+  /**
+   * Ports are indexed on their UUIDs so that they can easily be accessed to (dis)connect a cable
+   * TODO :
+   * * Move the ports to the module, indexed on the name
+   * * Make the cables be linked to a module's UUID and a port's name instead
+   */
   ports: Record<string, Port>
 }
