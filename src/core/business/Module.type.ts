@@ -3,6 +3,8 @@ import type { ModuleNode } from "./ModuleNode.type.js"
 
 export type Module = {
   id: string,
-  nodes: ModuleNode[]
-  links: ModuleLink[]
+  // Inner nodes are indexed on their names
+  nodes: Record<string, ModuleNode>,
+  // Inner links are indexed on their UUID
+  links: Record<string, ModuleLink>
 }

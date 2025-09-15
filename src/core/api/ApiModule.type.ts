@@ -1,3 +1,11 @@
+export type ApiPort = {
+  id: string
+  name: string
+  index: number
+  kind: 'input' | 'output'
+  target: string
+}
+
 export type ApiModule = {
   id: string
   rack: number
@@ -6,6 +14,7 @@ export type ApiModule = {
   type: string
   nodes: ApiModuleNode[]
   links: ApiModuleLink[]
+  ports: ApiPort[]
 }
 
 export type ApiModuleNode = { id: string, name: string, generator: string, polyphonic: boolean }
