@@ -5,7 +5,7 @@ import type { Module } from "../core/business/Module.type.js";
 import type { Synthesizer } from "../core/business/Synthesizer.type.js";
 import { indexOn } from "../utils/indexOn.js";
 import { CableBuilder } from "./CableBuilder.js";
-import { ModuleFactory } from "./ModuleFactory.js";
+import { ModuleBuilder } from "./ModuleBuilder.js";
 import { PortBuilder } from "./PortBuilder.js";
 
 export async function SynthesizerBuilder(
@@ -14,7 +14,7 @@ export async function SynthesizerBuilder(
   cablesRequest: Promise<ApiCable[]>
 ): Promise<Synthesizer> {
   const [data, apiModules, apiCables] = await Promise.all([request, modulesRequest, cablesRequest])
-  const modules = apiModules.map(ModuleFactory)
+  const modules = apiModules.map(ModuleBuilder)
 
   const results: Synthesizer = {
     voices: data.voices,

@@ -6,7 +6,7 @@ function findNode({ nodes }: ApiModule, name: string): ModuleNode {
   return nodes.find(n => n.name === name) as ModuleNode
 }
 
-export function ModuleLinkFactory(link: ApiModuleLink, module: ApiModule): ModuleLink {
+export function LinkBuilder(link: ApiModuleLink, module: ApiModule): ModuleLink {
   return {
     id: link.id,
     from: { node: findNode(module, link.from.node), index: link.from.index },
