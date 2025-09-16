@@ -1,5 +1,6 @@
 {
-  "name": "@synple/core",
+  "name": "@jsynple/core",
+  "private": false,
   "version": "1.0.0",
   "description": "",
   "scripts": {
