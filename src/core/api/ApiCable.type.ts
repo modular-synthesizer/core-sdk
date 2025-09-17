@@ -1,6 +1,11 @@
+type ApiCableEnd = {
+  module: string
+  port: string
+}
+
 export type ApiCable = {
   id: string
-  from: string
-  to: string
+  from: ApiCableEnd
+  to: ApiCableEnd
   color: string
 }

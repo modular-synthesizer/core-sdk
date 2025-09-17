@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest"
 import { SynthesizerBuilder } from "../../src/builders/SynthesizerBuilder"
-import { ApiSynthesizer } from "../../src/core/api/ApiSynthesizer.type"
-import { ApiModule } from "../../src/core/api/ApiModule.type"
-import { MonophonicNode, PolyphonicNode } from "../../src/core/business/ModuleNode.type"
-import { ApiCable } from "../../src/core/api/ApiCable.type"
+import type { ApiSynthesizer } from "../../src/core/api/ApiSynthesizer.type"
+import type { ApiModule } from "../../src/core/api/ApiModule.type"
+import type { MonophonicNode, PolyphonicNode } from "../../src/core/business/ModuleNode.type"
+import type { ApiCable } from "../../src/core/api/ApiCable.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
@@ -36,13 +36,18 @@ describe("SynthesizerBuilder", () => {
         ],
         ports: [
           { id: "port-id", name: "port", index: 0, kind: "output", target: "test-poly" },
-          { id: "input-id", name: "port", index: 0, kind: "input", target: "test-poly" }
+          { id: "input-id", name: "input", index: 0, kind: "input", target: "test-poly" }
         ]
       }]
     }
     const cablesFetcher: () => Promise<ApiCable[]> = async () => {
       return [
-        { id: 'cable-id', from: 'port-id', to: 'input-id', color: 'red' }
+        {
+          id: 'cable-id',
+          from: { port: 'port', module: 'module-id' },
+          to: { port: 'input', module: 'module-id' },
+          color: 'red'
+        }
       ]
     }
     const synthesizer = await SynthesizerBuilder(fetcher(), modulesFetcher(), cablesFetcher())
@@ -134,7 +139,7 @@ describe("SynthesizerBuilder", () => {
     })
 
     describe("Ports", () => {
-      const port = synthesizer.ports["port-id"]
+      const port = synthesizer.modules['module-id']?.ports.port
 
       it("Has the correct UUID", () => {
         expect(port.id).toEqual("port-id")

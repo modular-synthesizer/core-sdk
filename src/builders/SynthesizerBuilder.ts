@@ -1,12 +1,10 @@
 import type { ApiCable } from "../core/api/ApiCable.type.js";
 import type { ApiModule } from "../core/api/ApiModule.type.js";
 import type { ApiSynthesizer } from "../core/api/ApiSynthesizer.type.js";
-import type { Module } from "../core/business/Module.type.js";
 import type { Synthesizer } from "../core/business/Synthesizer.type.js";
 import { indexOn } from "../utils/indexOn.js";
 import { CableBuilder } from "./CableBuilder.js";
 import { ModuleBuilder } from "./ModuleBuilder.js";
-import { PortBuilder } from "./PortBuilder.js";
 
 export async function SynthesizerBuilder(
   request: Promise<ApiSynthesizer>,
@@ -21,14 +19,10 @@ export async function SynthesizerBuilder(
     name: data.name,
     id: data.id,
     modules: indexOn(modules, "id"),
-    cables: [],
-    ports: {}
+    cables: []
   }
 
-  // Trouver un moyen de lui passer le module, et non l'api module, pour le linker correctement.
-  const ports = apiModules.flatMap(m => m.ports.map(p => PortBuilder(p, results.modules[m.id] as Module)))
-  results.ports = indexOn(ports, "id")
-  results.cables = apiCables.map(c => CableBuilder(c, results.ports))
+  results.cables = apiCables.map(c => CableBuilder(c, results.modules))
 
   return results
 }
