@@ -25,6 +25,6 @@
     "uuid": "^11.1.0",
     "vitest": "^3.2.4"
   },
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts"
+  "main": "./dist/index.mjs",
+  "typings": "./dist/index.d.mts"
 }
