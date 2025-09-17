@@ -7,7 +7,7 @@ import type { ApiCable } from "../../src/core/api/ApiCable.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
-    const fetcher: () => Promise<ApiSynthesizer> = async () => {
+    const fetcher: () => ApiSynthesizer = () => {
       return { id: "synth-id", name: "synth name", voices: 16 }
     }
     const monophonicNode: MonophonicNode = {
@@ -23,7 +23,7 @@ describe("SynthesizerBuilder", () => {
       generator: 'createGain',
       id: 'poly-id'
     }
-    const modulesFetcher: () => Promise<ApiModule[]> = async () => {
+    const modulesFetcher: () => ApiModule[] = () => {
       return [{
         id: "module-id",
         rack: 0,
@@ -40,7 +40,7 @@ describe("SynthesizerBuilder", () => {
         ]
       }]
     }
-    const cablesFetcher: () => Promise<ApiCable[]> = async () => {
+    const cablesFetcher: () => ApiCable[] = () => {
       return [
         {
           id: 'cable-id',

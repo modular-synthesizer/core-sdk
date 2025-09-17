@@ -7,11 +7,10 @@ import { CableBuilder } from "./CableBuilder.js";
 import { ModuleBuilder } from "./ModuleBuilder.js";
 
 export async function SynthesizerBuilder(
-  request: Promise<ApiSynthesizer>,
-  modulesRequest: Promise<ApiModule[]>,
-  cablesRequest: Promise<ApiCable[]>
+  data: ApiSynthesizer,
+  apiModules: ApiModule[],
+  apiCables: ApiCable[]
 ): Promise<Synthesizer> {
-  const [data, apiModules, apiCables] = await Promise.all([request, modulesRequest, cablesRequest])
   const modules = apiModules.map(ModuleBuilder)
 
   const results: Synthesizer = {
