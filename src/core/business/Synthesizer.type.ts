@@ -1,8 +1,8 @@
+import { ScaledCoordinates } from "../utils/ScaledCoordinates.js"
 import type { Cable } from "./Cable.type.js"
 import type { Module } from "./Module.type.js"
-import type { Port } from "./Port.type.js"
 
-export type Synthesizer = {
+export type Synthesizer = ScaledCoordinates & {
   id: string
   name: string
   voices: number
