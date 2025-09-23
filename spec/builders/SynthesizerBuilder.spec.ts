@@ -8,7 +8,7 @@ import type { ApiCable } from "../../src/core/api/ApiCable.type"
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
     const fetcher: () => ApiSynthesizer = () => {
-      return { id: "synth-id", name: "synth name", voices: 16 }
+      return { id: "synth-id", name: "synth name", voices: 16, x: 0, y: 0, scale: 1.0 }
     }
     const monophonicNode: MonophonicNode = {
       polyphonic: false,

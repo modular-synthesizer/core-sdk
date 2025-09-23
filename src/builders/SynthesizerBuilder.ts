@@ -18,7 +18,10 @@ export async function SynthesizerBuilder(
     name: data.name,
     id: data.id,
     modules: indexOn(modules, "id"),
-    cables: []
+    cables: [],
+    x: data.x,
+    y: data.y,
+    scale: data.scale,
   }
 
   results.cables = apiCables.map(c => CableBuilder(c, results.modules))
