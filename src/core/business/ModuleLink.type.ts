@@ -6,4 +6,5 @@ export type ModuleLink = {
   from: LinkEnd,
   to: LinkEnd,
   id: string
+  param?: string
 }

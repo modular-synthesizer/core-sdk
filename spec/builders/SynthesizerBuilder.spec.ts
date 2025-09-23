@@ -21,7 +21,7 @@ describe("SynthesizerBuilder", () => {
       polyphonic: true,
       name: 'test-poly',
       generator: 'createGain',
-      id: 'poly-id'
+      id: 'poly-id',
     }
     const modulesFetcher: () => ApiModule[] = () => {
       return [{
@@ -32,12 +32,13 @@ describe("SynthesizerBuilder", () => {
         type: "VCO",
         nodes: [monophonicNode, polyphonicNode],
         links: [
-          { from: { node: "test-mono", index: 0 }, to: { node: "test-poly", index: 1 }, id: "link-id" }
+          { from: { node: "test-mono", index: 0 }, to: { node: "test-poly", index: 1 }, id: "link-id" },
+          { from: { node: "test-mono", index: 0 }, to: { node: "test-poly.gain", index: 0 }, id: "other-link-id" },
         ],
         ports: [
           { id: "port-id", name: "port", index: 0, kind: "output", target: "test-poly" },
-          { id: "input-id", name: "input", index: 0, kind: "input", target: "test-poly" }
-        ]
+          { id: "input-id", name: "input", index: 0, kind: "input", target: "test-poly" },
+        ],
       }]
     }
     const cablesFetcher: () => ApiCable[] = () => {
@@ -46,8 +47,8 @@ describe("SynthesizerBuilder", () => {
           id: 'cable-id',
           from: { port: 'port', module: 'module-id' },
           to: { port: 'input', module: 'module-id' },
-          color: 'red'
-        }
+          color: 'red',
+        },
       ]
     }
     const synthesizer = await SynthesizerBuilder(fetcher(), modulesFetcher(), cablesFetcher())
@@ -104,22 +105,49 @@ describe("SynthesizerBuilder", () => {
         })
       })
       describe("Links", () => {
-        const link = module.links["link-id"]
+        describe("To another node", () => {
+          const link = module.links["link-id"]
 
-        it("Has the correct UUID", () => {
-          expect(link.id).toEqual("link-id")
+          it("Has the correct UUID", () => {
+            expect(link.id).toEqual("link-id")
+          })
+          it("Has the correct start node", () => {
+            expect(link.from.node.name).toEqual("test-mono")
+          })
+          it("Has the correct start index", () => {
+            expect(link.from.index).toEqual(0)
+          })
+          it("Has the correct end node", () => {
+            expect(link.to.node.name).toEqual("test-poly")
+          })
+          it("Has the correct end index", () => {
+            expect(link.to.index).toEqual(1)
+          })
+          it("Links to no parameter", () => {
+            expect(link.param).toBeUndefined()
+          })
         })
-        it("Has the correct start node", () => {
-          expect(link.from.node.name).toEqual("test-mono")
-        })
-        it("Has the correct start index", () => {
-          expect(link.from.index).toEqual(0)
-        })
-        it("Has the correct end node", () => {
-          expect(link.to.node.name).toEqual("test-poly")
-        })
-        it("Has the correct end index", () => {
-          expect(link.to.index).toEqual(1)
+        describe("To a parameter", () => {
+          const link = module.links["other-link-id"]
+
+          it("Has the correct UUID", () => {
+            expect(link.id).toEqual("other-link-id")
+          })
+          it("Has the correct start node", () => {
+            expect(link.from.node.name).toEqual("test-mono")
+          })
+          it("Has the correct start index", () => {
+            expect(link.from.index).toEqual(0)
+          })
+          it("Has the correct end node", () => {
+            expect(link.to.node.name).toEqual("test-poly")
+          })
+          it("Has the correct end index", () => {
+            expect(link.to.index).toEqual(0)
+          })
+          it("Remembers the audio parameter to link to", () => {
+            expect(link.param).toEqual("gain")
+          })
         })
       })
     })
