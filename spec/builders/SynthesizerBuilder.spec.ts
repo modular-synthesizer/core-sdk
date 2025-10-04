@@ -4,6 +4,7 @@ import type { ApiSynthesizer } from "../../src/core/api/ApiSynthesizer.type"
 import type { ApiModule } from "../../src/core/api/ApiModule.type"
 import type { MonophonicNode, PolyphonicNode } from "../../src/core/business/ModuleNode.type"
 import type { ApiCable } from "../../src/core/api/ApiCable.type"
+import type { ParamLink } from "../../src/core/business/ModuleLink.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
@@ -124,7 +125,7 @@ describe("SynthesizerBuilder", () => {
             expect(link.to.index).toEqual(1)
           })
           it("Links to no parameter", () => {
-            expect(link.param).toBeUndefined()
+            expect(link.toParameter).toBeFalsy()
           })
         })
         describe("To a parameter", () => {
@@ -145,8 +146,11 @@ describe("SynthesizerBuilder", () => {
           it("Has the correct end index", () => {
             expect(link.to.index).toEqual(0)
           })
+          it("Remembers it is linked to an audio parameter", () => {
+            expect(link.toParameter).toBeTruthy()
+          })
           it("Remembers the audio parameter to link to", () => {
-            expect(link.param).toEqual("gain")
+            expect((link as ParamLink).parameter).toEqual('gain')
           })
         })
       })
