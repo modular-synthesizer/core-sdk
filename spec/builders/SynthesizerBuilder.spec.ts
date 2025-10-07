@@ -8,6 +8,7 @@ import type { ParamLink } from "../../src/core/business/ModuleLink.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
+    const today = (new Date()).toISOString()
     const fetcher: () => ApiSynthesizer = () => {
       return { id: "synth-id", name: "synth name", voices: 16, x: 0, y: 0, scale: 1.0 }
     }
@@ -40,6 +41,20 @@ describe("SynthesizerBuilder", () => {
           { id: "port-id", name: "port", index: 0, kind: "output", target: "test-poly" },
           { id: "input-id", name: "input", index: 0, kind: "input", target: "test-poly" },
         ],
+        parameters: [
+          {
+            id: 'param-id',
+            name: 'gain',
+            targets: [ 'test-mono' ],
+            value: 2.5,
+            minimum: 2,
+            maximum: 5,
+            step: 0.1,
+            precision: 1,
+            field: 'gain',
+            t: today
+          }
+        ]
       }]
     }
     const cablesFetcher: () => ApiCable[] = () => {
@@ -152,6 +167,37 @@ describe("SynthesizerBuilder", () => {
           it("Remembers the audio parameter to link to", () => {
             expect((link as ParamLink).parameter).toEqual('gain')
           })
+        })
+      })
+      describe("Parameters", () => {
+        const parameter = module.parameters.gain
+
+        it("Has the correct UUID", () => {
+          expect(parameter.id).toEqual("param-id")
+        })
+        it("Has the correct value", () => {
+          expect(parameter.value).toEqual(2.5)
+        })
+        it("Has the correct minimum value", () => {
+          expect(parameter.minimum).toEqual(2)
+        })
+        it("Has the correct maximum value", () => {
+          expect(parameter.maximum).toEqual(5)
+        })
+        it("Has the correct step value", () => {
+          expect(parameter.step).toEqual(0.1)
+        })
+        it("Has the correct precision", () => {
+          expect(parameter.precision).toEqual(1)
+        })
+        it("Points to the correct targets", () => {
+          expect(parameter.targets[0].id).toEqual(monophonicNode.id)
+        })
+        it("Points to the correct field", () => {
+          expect(parameter.field).toEqual("gain")
+        })
+        it("Has the correct timestamp", () => {
+          expect(parameter.t.toISOString()).toEqual(today)
         })
       })
     })

@@ -1,4 +1,4 @@
-import { ScaledCoordinates } from "../utils/ScaledCoordinates"
+import type { ScaledCoordinates } from "../utils/ScaledCoordinates"
 
 export type ApiSynthesizer = ScaledCoordinates & {
   id: string

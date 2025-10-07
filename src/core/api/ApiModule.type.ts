@@ -1,3 +1,5 @@
+import type { ApiParameter } from "./ApiParameter"
+
 export type ApiPort = {
   id: string
   name: string
@@ -15,6 +17,7 @@ export type ApiModule = {
   nodes: ApiModuleNode[]
   links: ApiModuleLink[]
   ports: ApiPort[]
+  parameters: ApiParameter[]
 }
 
 export type ApiModuleNode = { id: string, name: string, generator: string, polyphonic: boolean }
