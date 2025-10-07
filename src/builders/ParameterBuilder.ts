@@ -1,4 +1,4 @@
-import type { ApiParameter } from "../core/api/ApiParameter";
+import type { ApiParameter } from "../core/api/ApiParameter.type";
 import type { Module } from "../core/business/Module.type";
 import type { Parameter } from "../core/business/Parameter.type";
 

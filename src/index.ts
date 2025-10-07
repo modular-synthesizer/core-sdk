@@ -1,9 +1,9 @@
 export type {
-  Synthesizer, Module, Cable, ModuleLink, ModuleNode, NodeGenerator, Port, MonophonicNode, PolyphonicNode
+  Synthesizer, Module, Cable, ModuleLink, ModuleNode, NodeGenerator, Port, MonophonicNode, PolyphonicNode, Parameter
 } from "./core/business/index.js"
 
 export type {
-  ApiModule, ApiCable, ApiSynthesizer
+  ApiModule, ApiCable, ApiSynthesizer, ApiParameter
 } from "./core/api/index.js"
 
 export { SynthesizerBuilder } from "./builders/SynthesizerBuilder.js"

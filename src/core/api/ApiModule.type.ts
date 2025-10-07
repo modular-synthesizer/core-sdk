@@ -1,4 +1,4 @@
-import type { ApiParameter } from "./ApiParameter"
+import type { ApiParameter } from "./ApiParameter.type"
 
 export type ApiPort = {
   id: string
