@@ -13,4 +13,10 @@ export type Module = {
   ports: Record<string, Port>
 
   parameters: Record<string, Parameter>
+
+  rack: number
+
+  slot: number
+
+  slots: number
 }

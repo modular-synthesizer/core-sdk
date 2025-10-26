@@ -10,6 +10,9 @@ export function ModuleBuilder(module: ApiModule): Module {
   const nodes = module.nodes.map(NodeBuilder)
   const result: Module = {
     id: module.id,
+    slot: module.slot,
+    slots: module.slots,
+    rack: module.rack,
     nodes: indexOn(nodes, "name"),
     links: {},
     ports: {},
