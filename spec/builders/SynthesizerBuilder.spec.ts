@@ -28,9 +28,9 @@ describe("SynthesizerBuilder", () => {
     const modulesFetcher: () => ApiModule[] = () => {
       return [{
         id: "module-id",
-        rack: 0,
-        slot: 0,
-        slots: 2,
+        rack: 1,
+        slot: 2,
+        slots: 6,
         type: "VCO",
         nodes: [monophonicNode, polyphonicNode],
         links: [
@@ -84,6 +84,15 @@ describe("SynthesizerBuilder", () => {
 
       it("Has created a module with the correct ID", () => {
         expect(module.id).toEqual("module-id")
+      })
+      it("Has created a module with the correct rack", () => {
+        expect(module.rack).toEqual(1)
+      })
+      it("Has created a module with the correct width", () => {
+        expect(module.slots).toEqual(6)
+      })
+      it("Has created a module with the correct slot", () => {
+        expect(module.slot).toEqual(2)
       })
 
       describe("Nodes", () => {
