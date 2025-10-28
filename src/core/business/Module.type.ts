@@ -3,7 +3,14 @@ import type { ModuleNode } from "./ModuleNode.type.js"
 import type { Parameter } from "./Parameter.type.js"
 import type { Port } from "./Port.type.js"
 
-export type Module = {
+export type ModuleBox = {
+  id: string
+  rack: number
+  slot: number
+  slots: number
+}
+
+export type Module = ModuleBox & {
   id: string,
   // Inner nodes are indexed on their names
   nodes: Record<string, ModuleNode>,
@@ -13,10 +20,4 @@ export type Module = {
   ports: Record<string, Port>
 
   parameters: Record<string, Parameter>
-
-  rack: number
-
-  slot: number
-
-  slots: number
 }

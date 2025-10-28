@@ -7,3 +7,5 @@ export type {
 } from "./core/api/index.js"
 
 export { SynthesizerBuilder } from "./builders/SynthesizerBuilder.js"
+
+export { feats } from "./features/index.js"

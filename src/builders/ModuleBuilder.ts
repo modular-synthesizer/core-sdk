@@ -28,7 +28,5 @@ export function ModuleBuilder(module: ApiModule): Module {
   const parameters = module.parameters.map(p => ParameterBuilder(p, result))
   result.parameters = indexOn(parameters, "name")
 
-  console.log(result.ports)
-
   return result
 }
