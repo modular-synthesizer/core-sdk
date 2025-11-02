@@ -56,7 +56,7 @@ describe("SynthesizerBuilder", () => {
           }
         ],
         controls: [
-          { id: "control-id" },
+          { id: "control-id", component: 'SmallKnob', payload: { target: "test-mono", x: 0, y: 10, label: "TEST" } },
         ]
       }]
     }
