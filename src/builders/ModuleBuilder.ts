@@ -1,6 +1,7 @@
 import type { ApiModule } from "../core/api/ApiModule.type.js";
 import type { Module } from "../core/business/Module.type.js";
 import { indexOn } from "../utils/indexOn.js";
+import { ControlBuilder } from "./ControlBuilder.js";
 import { LinkBuilder } from "./LinkBuilder.js";
 import { NodeBuilder } from "./NodeBuilder.js";
 import { ParameterBuilder } from "./ParameterBuilder.js";
@@ -16,7 +17,8 @@ export function ModuleBuilder(module: ApiModule): Module {
     nodes: indexOn(nodes, "name"),
     links: {},
     ports: {},
-    parameters: {}
+    parameters: {},
+    controls: module.controls.map(ControlBuilder)
   }
 
   const links = module.links.map(l => LinkBuilder(l, result))

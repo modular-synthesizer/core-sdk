@@ -45,7 +45,7 @@ describe("SynthesizerBuilder", () => {
           {
             id: 'param-id',
             name: 'gain',
-            targets: [ 'test-mono' ],
+            targets: ['test-mono'],
             value: 2.5,
             minimum: 2,
             maximum: 5,
@@ -54,6 +54,9 @@ describe("SynthesizerBuilder", () => {
             field: 'gain',
             t: today
           }
+        ],
+        controls: [
+          { id: "control-id" },
         ]
       }]
     }
@@ -242,6 +245,14 @@ describe("SynthesizerBuilder", () => {
       })
       it("Has the correct target", () => {
         expect(port.target.name).toEqual("test-poly")
+      })
+    })
+
+    describe('Controls', () => {
+      const control = synthesizer.modules['module-id'].controls[0]
+
+      it('Has the correct UUID', () => {
+        expect(control.id).toEqual('control-id')
       })
     })
   })

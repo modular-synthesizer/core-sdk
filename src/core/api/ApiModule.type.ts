@@ -1,3 +1,4 @@
+import { ApiControl } from "./ApiControl.type"
 import type { ApiParameter } from "./ApiParameter.type"
 
 export type ApiPort = {
@@ -18,6 +19,7 @@ export type ApiModule = {
   links: ApiModuleLink[]
   ports: ApiPort[]
   parameters: ApiParameter[]
+  controls: ApiControl[]
 }
 
 export type ApiModuleNode = { id: string, name: string, generator: string, polyphonic: boolean }

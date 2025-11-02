@@ -1,3 +1,4 @@
+import { Control } from "./Control.type.js"
 import type { ModuleLink } from "./ModuleLink.type.js"
 import type { ModuleNode } from "./ModuleNode.type.js"
 import type { Parameter } from "./Parameter.type.js"
@@ -20,4 +21,6 @@ export type Module = ModuleBox & {
   ports: Record<string, Port>
 
   parameters: Record<string, Parameter>
+
+  controls: Control[]
 }
