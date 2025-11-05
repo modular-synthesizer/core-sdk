@@ -1,3 +1,4 @@
-import type { Identified } from "../utils/Identified.type";
+import type { ControlTemplate } from "../api/ApiControl.type";
+import type { ModuleNode } from "./ModuleNode.type";
 
-export type Control = Identified
+export type Control = ControlTemplate<ModuleNode>

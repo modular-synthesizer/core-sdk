@@ -1,4 +1,4 @@
-import { ApiControl } from "./ApiControl.type"
+import type { ApiControl } from "./ApiControl.type"
 import type { ApiParameter } from "./ApiParameter.type"
 
 export type ApiPort = {

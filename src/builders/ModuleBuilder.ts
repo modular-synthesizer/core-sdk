@@ -18,8 +18,10 @@ export function ModuleBuilder(module: ApiModule): Module {
     links: {},
     ports: {},
     parameters: {},
-    controls: module.controls.map(ControlBuilder)
+    controls: [],
   }
+
+  result.controls = module.controls.map(c => ControlBuilder(c, result)).filter(c => !!c)
 
   const links = module.links.map(l => LinkBuilder(l, result))
   result.links = indexOn(links, "id")
