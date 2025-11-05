@@ -6,6 +6,6 @@ export function ControlBuilder(data: ApiControl, module: Module): Control|undefi
   const component = data.component
   if (["SmallKnob", "Knob", "LargeKnob"].includes(component)) {
     const target: string = `${data.payload.target}`
-    return { component, id: data.id, payload: { ...data.payload, target: module.nodes[target] } }
+    return { component, id: data.id, payload: { ...data.payload, target: module.parameters[target] } }
   }
 }

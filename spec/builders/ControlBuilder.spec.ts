@@ -4,24 +4,25 @@ import { ControlBuilder } from "../../src/builders/ControlBuilder"
 import type { Control } from "../../src/core/business/Control.type"
 import type { ApiModule } from "../../src/core/api/ApiModule.type"
 import { ModuleBuilder } from "../../src/builders/ModuleBuilder"
+import { Parameterfactory } from "../factories/ParameterFactory"
 
-describe("ControlBuilder", () => {
+describe("ControlBuilder", async () => {
   const module: ApiModule = {
     id: "module-id",
     rack: 0, slot: 0, slots: 2,
     nodes: [
       { id: "target-1", name: "target-one", generator: "createGain", polyphonic: false },
-      { id: "target-2", name: "target-two", generator: "createGain", polyphonic: false },
-      { id: "target-3", name: "target-three", generator: "createGain", polyphonic: false },
     ],
     links: [],
     ports: [],
-    parameters: [],
+    parameters: [
+      await Parameterfactory({ targets: ["target-one"], name: "param" }),
+    ],
     type: "",
     controls: [
-      { id: "small-knob-id", component: "SmallKnob", payload: { x: 10, y: 20, target: "target-one", label: "test" } },
-      { id: 'knob-id', component: 'Knob', payload: { x: 11, y: 21, target: 'target-two', label: "test2" } },
-      { id: "large-knob-id", component: "LargeKnob", payload: { x: 12, y: 22, target: "target-three", label: "test3" } },
+      { id: "small-knob-id", component: "SmallKnob", payload: { x: 10, y: 20, target: "param", label: "test" } },
+      { id: 'knob-id', component: 'Knob', payload: { x: 11, y: 21, target: 'param', label: "test2" } },
+      { id: "large-knob-id", component: "LargeKnob", payload: { x: 12, y: 22, target: "param", label: "test3" } },
     ]
   }
 
@@ -45,8 +46,8 @@ describe("ControlBuilder", () => {
     it("Has the correct label", () => {
       expect(smallKnob.payload.label).toBe("test")
     })
-    it("Targets the correct node", () => {
-      expect(smallKnob.payload.target?.id).toEqual("target-1")
+    it("Targets the correct parameter", () => {
+      expect(smallKnob.payload.target?.id).toEqual("parameter-id")
     })
   })
 
@@ -69,7 +70,7 @@ describe("ControlBuilder", () => {
       expect(knob.payload.label).toBe("test2")
     })
     it("Targets the correct node", () => {
-      expect(knob.payload.target?.id).toEqual("target-2")
+      expect(knob.payload.target?.id).toEqual("parameter-id")
     })
   })
 
@@ -92,7 +93,7 @@ describe("ControlBuilder", () => {
       expect(largeKnob.payload.label).toBe("test3")
     })
     it("Targets the correct node", () => {
-      expect(largeKnob.payload.target?.id).toEqual("target-3")
+      expect(largeKnob.payload.target?.id).toEqual("parameter-id")
     })
   })
 })

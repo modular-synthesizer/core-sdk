@@ -1,4 +1,4 @@
 import type { ControlTemplate } from "../api/ApiControl.type";
-import type { ModuleNode } from "./ModuleNode.type";
+import type { Parameter } from "./Parameter.type";
 
-export type Control = ControlTemplate<ModuleNode>
+export type Control = ControlTemplate<Parameter>
