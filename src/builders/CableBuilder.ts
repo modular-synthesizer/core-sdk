@@ -1,7 +1,7 @@
-import type { ApiCable } from "../core/api/ApiCable.type.js";
-import type { Cable } from "../core/business/Cable.type.js";
-import type { Module } from "../core/business/Module.type.js";
-import type { Port } from "../core/business/Port.type.js";
+import type { ApiCable } from "../types/api/ApiCable.type.js";
+import type { Cable } from "../types/business/Cable.type.js";
+import type { Module } from "../types/business/Module.type.js";
+import type { Port } from "../types/business/Port.type.js";
 
 export function CableBuilder(data: ApiCable, modules: Record<string, Module>): Cable {
   return {

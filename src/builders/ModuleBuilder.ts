@@ -1,5 +1,5 @@
-import type { ApiModule } from "../core/api/ApiModule.type.js";
-import type { Module } from "../core/business/Module.type.js";
+import type { ApiModule } from "../types/api/ApiModule.type.js";
+import type { Module } from "../types/business/Module.type.js";
 import { indexOn } from "../utils/indexOn.js";
 import { ControlBuilder } from "./ControlBuilder.js";
 import { LinkBuilder } from "./LinkBuilder.js";

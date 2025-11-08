@@ -1,7 +1,7 @@
-import type { Module } from "../core/business/Module.type"
-import type { ApiModuleLink } from "../core/api/ApiModule.type.js";
-import type { BaseLink, ModuleLink } from "../core/business/ModuleLink.type.js";
-import type { ModuleNode } from "../core/business/ModuleNode.type.js";
+import type { Module } from "../types/business/Module.type"
+import type { ApiModuleLink } from "../types/api/ApiModule.type.js";
+import type { BaseLink, ModuleLink } from "../types/business/ModuleLink.type.js";
+import type { ModuleNode } from "../types/business/ModuleNode.type.js";
 
 const PARAM_REGEX = /^[^.]+\.{1}[^.]+$/
 

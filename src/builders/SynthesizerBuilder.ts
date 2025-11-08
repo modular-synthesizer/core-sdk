@@ -1,7 +1,7 @@
-import type { ApiCable } from "../core/api/ApiCable.type.js";
-import type { ApiModule } from "../core/api/ApiModule.type.js";
-import type { ApiSynthesizer } from "../core/api/ApiSynthesizer.type.js";
-import type { Synthesizer } from "../core/business/Synthesizer.type.js";
+import type { ApiCable } from "../types/api/ApiCable.type.js";
+import type { ApiModule } from "../types/api/ApiModule.type.js";
+import type { ApiSynthesizer } from "../types/api/ApiSynthesizer.type.js";
+import type { Synthesizer } from "../types/business/Synthesizer.type.js";
 import { indexOn } from "../utils/indexOn.js";
 import { CableBuilder } from "./CableBuilder.js";
 import { ModuleBuilder } from "./ModuleBuilder.js";

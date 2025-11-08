@@ -1,6 +1,6 @@
-import type { ApiParameter } from "../core/api/ApiParameter.type";
-import type { Module } from "../core/business/Module.type";
-import type { Parameter } from "../core/business/Parameter.type";
+import type { ApiParameter } from "../types/api/ApiParameter.type";
+import type { Module } from "../types/business/Module.type";
+import type { Parameter } from "../types/business/Parameter.type";
 
 function ParameterBuilderTemplate() {
   return (data: ApiParameter, module: Module): Parameter => {

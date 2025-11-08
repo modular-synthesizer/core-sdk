@@ -1,5 +1,5 @@
-import type { ApiModuleNode } from "../core/api/ApiModule.type.js";
-import type { ModuleNode } from "../core/business/ModuleNode.type.js";
+import type { ApiModuleNode } from "../types/api/ApiModule.type.js";
+import type { ModuleNode } from "../types/business/ModuleNode.type.js";
 
 export function NodeBuilder(data: ApiModuleNode): ModuleNode {
   return data.polyphonic ? { ...data, audioNodes: [], } : { ...data, polyphonic: false }
