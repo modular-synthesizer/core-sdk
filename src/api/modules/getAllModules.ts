@@ -6,7 +6,7 @@ export type getAllModulesApi = (id: string, auth_token: string) => ExpectedResul
 
 export function getAllModulesTemplate(fetcher: Fetcher<ApiModule[]>): getAllModulesApi {
   return async (synthesizer_id, auth_token) => {
-    return await fetcher("GET", "/modules", { auth_token }, { synthesizer_id })
+    return await fetcher("GET", "/modules", { auth_token, synthesizer_id })
   }
 }
 
