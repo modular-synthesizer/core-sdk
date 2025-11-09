@@ -31,7 +31,7 @@ export type Payload<Entity> = Record<string, Entity>;
 /**
  * An HTTP payload used to create querystrings only contains strings as values.
  */
-export type HttpPayload = Payload<string | number>;
+export type HttpPayload = Payload<string>;
 
 export type HttpParams = Payload<string>
 
