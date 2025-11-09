@@ -1,5 +1,5 @@
-import { ApiSynthesizer } from "../../types/api/ApiSynthesizer.type";
-import { ExpectedResult, Fetcher } from "../../types/utils/Async";
+import type { ApiSynthesizer } from "../../types/api/ApiSynthesizer.type";
+import type { ExpectedResult, Fetcher } from "../../types/utils/Async";
 import { createFetcher } from "../createFetcher";
 
 export type GetSynthesizerApi = (id: string, auth_token: string) => ExpectedResult<ApiSynthesizer>

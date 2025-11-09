@@ -1,5 +1,5 @@
-import { ApiCable } from "../../types/api/ApiCable.type";
-import { ExpectedResult, Fetcher } from "../../types/utils/Async";
+import type { ApiCable } from "../../types/api/ApiCable.type";
+import type { ExpectedResult, Fetcher } from "../../types/utils/Async";
 import { createFetcher } from "../createFetcher";
 
 export type getAllCablesApi = (id: string, auth_token: string) => ExpectedResult<ApiCable[]>

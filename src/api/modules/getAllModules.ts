@@ -1,5 +1,5 @@
-import { ApiModule } from "../../types/api/ApiModule.type";
-import { ExpectedResult, Fetcher } from "../../types/utils/Async";
+import type { ApiModule } from "../../types/api/ApiModule.type";
+import type { ExpectedResult, Fetcher } from "../../types/utils/Async";
 import { createFetcher } from "../createFetcher";
 
 export type getAllModulesApi = (id: string, auth_token: string) => ExpectedResult<ApiModule[]>

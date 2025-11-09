@@ -1,4 +1,4 @@
-import { ApiModule } from "../../../src/types/api/ApiModule.type"
+import type { ApiModule } from "../../../src/types/api/ApiModule.type"
 import { createFactory } from "../../utils/factories"
 
 export const ApiModuleFactory = createFactory<ApiModule>({

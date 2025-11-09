@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
-import type { Module } from "../../src/core/business/Module.type"
+import type { Module } from "../../src/types/business/Module.type"
 import { ControlBuilder } from "../../src/builders/ControlBuilder"
-import type { Control } from "../../src/core/business/Control.type"
-import type { ApiModule } from "../../src/core/api/ApiModule.type"
+import type { Control } from "../../src/types/business/Control.type"
+import type { ApiModule } from "../../src/types/api/ApiModule.type"
 import { ModuleBuilder } from "../../src/builders/ModuleBuilder"
 import { Parameterfactory } from "../factories/ParameterFactory"
 

@@ -1,4 +1,4 @@
-import type { ApiParameter } from "../../src/core/api/ApiParameter.type";
+import type { ApiParameter } from "../../src/types/api/ApiParameter.type";
 import { createFactory } from "../utils/factories";
 
 export const Parameterfactory = createFactory<ApiParameter>({

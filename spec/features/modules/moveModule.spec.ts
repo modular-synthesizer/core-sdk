@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "vitest"
 import { moveModule } from "../../../src/features/modules/move.feature"
-import { ModuleBox } from "../../../src/core/business/Module.type"
+import type { ModuleBox } from "../../../src/types/business/Module.type"
 
 const feature = moveModule()
 
@@ -28,7 +28,8 @@ describe("Coordinates computation", async () => {
 
 describe("When there are colliding modules given", async () => {
 
-  let module: ModuleBox, collider: ModuleBox;
+  let module: ModuleBox;
+  let collider: ModuleBox;
 
   beforeEach(async () => {
     module = { ...modules[0] }

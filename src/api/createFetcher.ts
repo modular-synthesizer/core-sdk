@@ -18,7 +18,7 @@ export function createFetcher<Entity>(fetchFunction: Fetch) {
     parameters: HttpPayload = {},
     body: HttpPayload = {},
   ): ExpectedResult<Entity> => {
-    let response;
+    let response: Response;
     try {
       const params = new URLSearchParams(parameters);
       const hasBody = !["GET", "DELETE"].includes(method);

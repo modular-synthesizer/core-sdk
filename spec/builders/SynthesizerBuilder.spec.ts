@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest"
 import { SynthesizerBuilder } from "../../src/builders/SynthesizerBuilder"
-import type { ApiSynthesizer } from "../../src/core/api/ApiSynthesizer.type"
-import type { ApiModule } from "../../src/core/api/ApiModule.type"
-import type { MonophonicNode, PolyphonicNode } from "../../src/core/business/ModuleNode.type"
-import type { ApiCable } from "../../src/core/api/ApiCable.type"
-import type { ParamLink } from "../../src/core/business/ModuleLink.type"
+import type { ApiSynthesizer } from "../../src/types/api/ApiSynthesizer.type"
+import type { ApiModule } from "../../src/types/api/ApiModule.type"
+import type { MonophonicNode, PolyphonicNode } from "../../src/types/business/ModuleNode.type"
+import type { ApiCable } from "../../src/types/api/ApiCable.type"
+import type { ParamLink } from "../../src/types/business/ModuleLink.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {

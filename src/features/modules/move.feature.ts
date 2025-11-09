@@ -1,5 +1,5 @@
-import { ModuleBox } from "../../types/business/Module.type";
-import { Coordinates } from "../../utils/geometry/Coordinates.type";
+import type { ModuleBox } from "../../types/business/Module.type";
+import type { Coordinates } from "../../utils/geometry/Coordinates.type";
 
 function collides(
   collider: ModuleBox,

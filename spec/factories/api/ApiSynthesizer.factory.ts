@@ -1,4 +1,4 @@
-import { ApiSynthesizer } from "../../../src/types/api/ApiSynthesizer.type";
+import type { ApiSynthesizer } from "../../../src/types/api/ApiSynthesizer.type";
 import { createFactory } from "../../utils/factories";
 
 export const ApiSynthezsizerFactory = createFactory<ApiSynthesizer>({

@@ -1,4 +1,4 @@
-import { ApiCable } from "../../../src/types/api/ApiCable.type";
+import type { ApiCable } from "../../../src/types/api/ApiCable.type";
 import { createFactory } from "../../utils/factories";
 
 export const ApiCableFactory = createFactory<ApiCable>({

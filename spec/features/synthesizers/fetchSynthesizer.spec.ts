@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
-import { Synthesizer } from "../../../src/types/business/Synthesizer.type"
+import type { Synthesizer } from "../../../src/types/business/Synthesizer.type"
 import { SynthesizerFetcherTemplate } from "../../../src/features/synthesizers/fetchSynthesizer"
 import { ApiModuleFactory } from "../../factories/api/ApiModule.factory";
 import { createApiReturning } from "../../utils/api";

@@ -1,9 +1,9 @@
-import { getAllCables, getAllCablesApi } from "../../api/cables/getAllCables";
-import { getAllModules, getAllModulesApi } from "../../api/modules/getAllModules";
-import { getSynthesizer, GetSynthesizerApi } from "../../api/synthesizers/getSynthesizer";
+import { getAllCables, type getAllCablesApi } from "../../api/cables/getAllCables";
+import { getAllModules, type getAllModulesApi } from "../../api/modules/getAllModules";
+import { getSynthesizer, type GetSynthesizerApi } from "../../api/synthesizers/getSynthesizer";
 import { SynthesizerBuilder } from "../../builders/SynthesizerBuilder";
-import { Synthesizer } from "../../types/business/Synthesizer.type";
-import { Eventual } from "../../types/utils/Async";
+import type { Synthesizer } from "../../types/business/Synthesizer.type";
+import type { Eventual } from "../../types/utils/Async";
 
 type SynthesizerFunction = (s: GetSynthesizerApi, m: getAllModulesApi, l: getAllCablesApi) => (id: string, auth_token: string) => Eventual<Synthesizer>
 
