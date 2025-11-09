@@ -1,35 +1,18 @@
 import { describe, expect, test, vi } from "vitest";
 import { Synthesizer } from "../../../src/types/business/Synthesizer.type"
 import { SynthesizerFetcherTemplate } from "../../../src/features/synthesizers/fetchSynthesizer"
+import { ApiModuleFactory } from "../../factories/api/ApiModule.factory";
+import { createApiReturning } from "../../utils/api";
+import { ApiCableFactory } from "../../factories/api/ApiCable.factory";
+import { ApiSynthezsizerFactory } from "../../factories/api/ApiSynthesizer.factory";
 
 const inErrorApi = vi.fn().mockReturnValue({ ok: false, key: 'unknown', error: 'unknown' })
 
-const synthesizersApi = vi.fn().mockReturnValue({
-  ok: true,
-  data: {
-    id: "synthesizer-id",
-    name: "Synthesizer name",
-    x: 10, y: 20, scale: 2.0, voices: 1,
-  }
-})
+const synthesizersApi = createApiReturning(await ApiSynthezsizerFactory())
 
-const modulesApi = vi.fn().mockReturnValue({
-  ok: true, data: [
-    {
-      id: "module-id", rack: 0, slot: 0, slots: 2, type: "VCA", nodes: [], links: [], ports: [
-        { id: "port-1", index: 0, kind: "input", target: "gain", name: "IN" },
-        { id: "port-2", index: 0, kind: "output", target: "gain", name: "OUT" }
-      ], parameters: [], controls: []
-    }
-  ]
-})
+const modulesApi = createApiReturning([await ApiModuleFactory()])
 
-const cablesApi = vi.fn().mockReturnValue({
-  ok: true,
-  data: [
-    { id: "link-id", from: { module: "module-id", port: "IN" }, to: { module: "module-id", port: "OUT" }, color: "red" }
-  ]
-})
+const cablesApi = createApiReturning([await ApiCableFactory()])
 
 describe("Given that all APIs are responding correctly", async () => {
   const fetcher = SynthesizerFetcherTemplate(synthesizersApi, modulesApi, cablesApi)
@@ -89,8 +72,6 @@ describe("Given the modules API returns an error", async () => {
 describe("Given the modules API returns an error", async () => {
   const fetcher = SynthesizerFetcherTemplate(synthesizersApi, modulesApi, inErrorApi)
   const synthesizer: Synthesizer = await fetcher("synthesizer-id") as Synthesizer
-
-  console.log(synthesizer)
 
   test("Returns a synthesizer with the correct number of modules", () => {
     expect(Object.values(synthesizer.modules).length).toEqual(1)
