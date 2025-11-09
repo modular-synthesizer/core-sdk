@@ -16,7 +16,7 @@ const cablesApi = createApiReturning([await ApiCableFactory()])
 
 describe("Given that all APIs are responding correctly", async () => {
   const fetcher = SynthesizerFetcherTemplate(synthesizersApi, modulesApi, cablesApi)
-  const synthesizer: Synthesizer = await fetcher("synthesizer-id") as Synthesizer
+  const synthesizer: Synthesizer = await fetcher("synthesizer-id", "auth-token") as Synthesizer
 
   describe("I get a correct synthesizer as an output", () => {
 
@@ -49,7 +49,7 @@ describe("Given that all APIs are responding correctly", async () => {
 
 describe("Given the synthesizer API returns an error", async () => {
   const fetcher = SynthesizerFetcherTemplate(inErrorApi, modulesApi, cablesApi)
-  const synthesizer: Synthesizer | undefined = await fetcher("synthesizer-id")
+  const synthesizer: Synthesizer | undefined = await fetcher("synthesizer-id", "auth-token")
 
   test("Did not return a synthesizer at all", () => {
     expect(synthesizer).toBeUndefined()
@@ -58,7 +58,7 @@ describe("Given the synthesizer API returns an error", async () => {
 
 describe("Given the modules API returns an error", async () => {
   const fetcher = SynthesizerFetcherTemplate(synthesizersApi, inErrorApi, cablesApi)
-  const synthesizer: Synthesizer = await fetcher("synthesizer-id") as Synthesizer
+  const synthesizer: Synthesizer = await fetcher("synthesizer-id", "auth-token") as Synthesizer
 
   test("Returns a synthesizer with no modules", () => {
     expect(Object.values(synthesizer.modules).length).toEqual(0)
@@ -71,7 +71,7 @@ describe("Given the modules API returns an error", async () => {
 
 describe("Given the modules API returns an error", async () => {
   const fetcher = SynthesizerFetcherTemplate(synthesizersApi, modulesApi, inErrorApi)
-  const synthesizer: Synthesizer = await fetcher("synthesizer-id") as Synthesizer
+  const synthesizer: Synthesizer = await fetcher("synthesizer-id", "auth-token") as Synthesizer
 
   test("Returns a synthesizer with the correct number of modules", () => {
     expect(Object.values(synthesizer.modules).length).toEqual(1)
