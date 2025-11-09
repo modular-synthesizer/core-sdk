@@ -6,7 +6,7 @@ export type getAllCablesApi = (id: string, auth_token: string) => ExpectedResult
 
 export function getAllCablesTemplate(fetcher: Fetcher<ApiCable[]>): getAllCablesApi {
   return async (synthesizer_id, auth_token) => {
-    return await fetcher("GET", "/cables", { auth_token }, { synthesizer_id })
+    return await fetcher("GET", "/links/v2", { auth_token }, { synthesizer_id })
   }
 }
 

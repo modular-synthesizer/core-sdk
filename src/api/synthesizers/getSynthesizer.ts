@@ -6,7 +6,7 @@ export type GetSynthesizerApi = (id: string, auth_token: string) => ExpectedResu
 
 export function getSynthesizerTemplate(fetcher: Fetcher<ApiSynthesizer>): GetSynthesizerApi {
   return async (id, auth_token) => {
-    return await fetcher("GET", `/synthesizer/${id}`, { auth_token })
+    return await fetcher("GET", `/synthesizers/${id}`, { auth_token })
   }
 }
 
