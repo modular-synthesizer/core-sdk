@@ -2,12 +2,12 @@ import { describe, expect, test, vi } from "vitest";
 import { getSynthesizerTemplate } from "../../../src/api/synthesizers/getSynthesizer";
 import type { ApiSynthesizer } from "../../../src/types/api/ApiSynthesizer.type";
 import { createFetcher } from "../../../src/api/createFetcher";
-import { ApiSynthezsizerFactory } from "../../factories/api/ApiSynthesizer.factory";
+import { ApiSynthesizerFactory } from "../../factories/api/ApiSynthesizer.factory";
 
 const mocks = {
   fetch: vi.fn().mockReturnValue({
     status: 200,
-    json: async () => (await ApiSynthezsizerFactory())
+    json: async () => (await ApiSynthesizerFactory())
   })
 }
 

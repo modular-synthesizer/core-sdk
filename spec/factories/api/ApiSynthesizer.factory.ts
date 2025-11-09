@@ -1,7 +1,7 @@
 import type { ApiSynthesizer } from "../../../src/types/api/ApiSynthesizer.type";
 import { createFactory } from "../../utils/factories";
 
-export const ApiSynthezsizerFactory = createFactory<ApiSynthesizer>({
+export const ApiSynthesizerFactory = createFactory<ApiSynthesizer>({
   id: () => "synthesizer-id",
   name: () => "Synthesizer name",
   x: () => 10,

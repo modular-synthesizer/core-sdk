@@ -4,11 +4,11 @@ import { SynthesizerFetcherTemplate } from "../../../src/features/synthesizers/f
 import { ApiModuleFactory } from "../../factories/api/ApiModule.factory";
 import { createApiReturning } from "../../utils/api";
 import { ApiCableFactory } from "../../factories/api/ApiCable.factory";
-import { ApiSynthezsizerFactory } from "../../factories/api/ApiSynthesizer.factory";
+import { ApiSynthesizerFactory } from "../../factories/api/ApiSynthesizer.factory";
 
 const inErrorApi = vi.fn().mockReturnValue({ ok: false, key: 'unknown', error: 'unknown' })
 
-const synthesizersApi = createApiReturning(await ApiSynthezsizerFactory())
+const synthesizersApi = createApiReturning(await ApiSynthesizerFactory())
 
 const modulesApi = createApiReturning([await ApiModuleFactory()])
 
