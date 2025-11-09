@@ -10,6 +10,6 @@ export type { Control, SmallKnob, Knob, LargeKnob } from "./types/business/Contr
 
 export { SynthesizerBuilder } from "./builders/SynthesizerBuilder.js"
 
-export { SynthesizerFetcherTemplate } from "./features/synthesizers/fetchSynthesizer.js"
+export { fetchSynthesizer } from "./features/synthesizers/fetchSynthesizer.js"
 
 export { feats } from "./features/index.js"
