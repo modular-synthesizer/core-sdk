@@ -8,8 +8,10 @@ export type {
 
 export type { Control, SmallKnob, Knob, LargeKnob } from "./types/business/Control.type.js"
 
-export { SynthesizerBuilder } from "./builders/SynthesizerBuilder.js"
+export { getAllGenerators } from "./api/generators/getAllGenerators.js"
 
 export { fetchSynthesizer } from "./features/synthesizers/fetchSynthesizer.js"
+
+export { ExpectedResult } from "./types/utils/Async.js"
 
 export { feats } from "./features/index.js"
