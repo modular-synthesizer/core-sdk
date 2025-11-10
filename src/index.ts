@@ -12,6 +12,6 @@ export { getAllGenerators } from "./api/generators/getAllGenerators.js"
 
 export { fetchSynthesizer } from "./features/synthesizers/fetchSynthesizer.js"
 
-export { ExpectedResult } from "./types/utils/Async.js"
+export { ExpectedResult, Eventual, AsyncResult, AsyncSuccess, AsyncFailure } from "./types/utils/Async.js"
 
 export { feats } from "./features/index.js"
