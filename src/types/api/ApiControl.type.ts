@@ -1,6 +1,6 @@
 import type { Identified } from "../utils/Identified.type";
 
-export type ComponentName = "SmallKnob" | "Knob" | "LargeKnob"
+export type ComponentName = "SmallKnob" | "Knob" | "LargeKnob" | "Port"
 
 type KnobPayload<Target> = { x: number, y: number, target: Target, label: string }
 
@@ -10,4 +10,5 @@ export type ApiControl = Identified & (
   | GenericKnob<'SmallKnob', string>
   | GenericKnob<'Knob', string>
   | GenericKnob<'LargeKnob', string>
+  | GenericKnob<'Port', string>
 )
