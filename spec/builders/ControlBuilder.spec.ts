@@ -5,6 +5,7 @@ import type { Control } from "../../src/types/business/Control.type"
 import type { ApiModule } from "../../src/types/api/ApiModule.type"
 import { ModuleBuilder } from "../../src/builders/ModuleBuilder"
 import { Parameterfactory } from "../factories/ParameterFactory"
+import { PortFactory } from "../factories/PortFactory"
 
 describe("ControlBuilder", async () => {
   const module: ApiModule = {
@@ -14,7 +15,9 @@ describe("ControlBuilder", async () => {
       { id: "target-1", name: "target-one", generator: "createGain", polyphonic: false },
     ],
     links: [],
-    ports: [],
+    ports: [
+      await PortFactory({ target: "target-one"})
+    ],
     parameters: [
       await Parameterfactory({ targets: ["target-one"], name: "param" }),
     ],
@@ -23,6 +26,7 @@ describe("ControlBuilder", async () => {
       { id: "small-knob-id", component: "SmallKnob", payload: { x: 10, y: 20, target: "param", label: "test" } },
       { id: 'knob-id', component: 'Knob', payload: { x: 11, y: 21, target: 'param', label: "test2" } },
       { id: "large-knob-id", component: "LargeKnob", payload: { x: 12, y: 22, target: "param", label: "test3" } },
+      { id: "port-id", component: "Port", payload: { x: 13, y: 23, target: 'port-in', label: 'IN' }}
     ]
   }
 
@@ -94,6 +98,29 @@ describe("ControlBuilder", async () => {
     })
     it("Targets the correct node", () => {
       expect(largeKnob.payload.target?.id).toEqual("parameter-id")
+    })
+  })
+
+  describe("Port", () => {
+    const port: Control = ControlBuilder(module.controls[3], instanciated) as Control
+
+    it("Has the correct ID", () => {
+      expect(port.id).toEqual("port-id")
+    })
+    it("has the correct comonent", () => {
+      expect(port.component).toEqual("Port")
+    })
+    it("Has the correct X coordinate", () => {
+      expect(port.payload.x).toBe(13)
+    })
+    it("Has the correct Y coordinate", () => {
+      expect(port.payload.y).toBe(23)
+    })
+    it("Has the correct label", () => {
+      expect(port.payload.label).toBe("IN")
+    })
+    it("Targets the correct node", () => {
+      expect(port.payload.target?.id).toEqual("port-id")
     })
   })
 })
