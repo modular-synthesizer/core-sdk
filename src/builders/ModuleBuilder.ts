@@ -21,8 +21,6 @@ export function ModuleBuilder(module: ApiModule): Module {
     controls: [],
   }
 
-  result.controls = module.controls.map(c => ControlBuilder(c, result)).filter(c => !!c)
-
   const links = module.links.map(l => LinkBuilder(l, result))
   result.links = indexOn(links, "id")
 
@@ -31,6 +29,8 @@ export function ModuleBuilder(module: ApiModule): Module {
 
   const parameters = module.parameters.map(p => ParameterBuilder(p, result))
   result.parameters = indexOn(parameters, "name")
+
+  result.controls = module.controls.map(c => ControlBuilder(c, result)).filter(c => !!c)
 
   return result
 }
