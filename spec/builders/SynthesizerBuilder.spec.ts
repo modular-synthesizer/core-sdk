@@ -5,6 +5,7 @@ import type { ApiModule } from "../../src/types/api/ApiModule.type"
 import type { MonophonicNode, PolyphonicNode } from "../../src/types/business/ModuleNode.type"
 import type { ApiCable } from "../../src/types/api/ApiCable.type"
 import type { ParamLink } from "../../src/types/business/ModuleLink.type"
+import type { Port, SmallKnob } from "../../src/types/business/Control.type"
 
 describe("SynthesizerBuilder", () => {
   describe("Nominal case", async () => {
@@ -55,7 +56,10 @@ describe("SynthesizerBuilder", () => {
             t: today
           }
         ],
-        controls: [ ]
+        controls: [
+          { id: "sk-id", component: "SmallKnob", payload: { x: 0, y: 0, target: "gain", label: "SK" } },
+          { id: "p-id", component: "Port", payload: { x: 0, y: 0, target: "input", label: "IN" } }
+        ]
       }]
     }
     const cablesFetcher: () => ApiCable[] = () => {
@@ -208,6 +212,31 @@ describe("SynthesizerBuilder", () => {
         })
         it("Has the correct timestamp", () => {
           expect(parameter.t.toISOString()).toEqual(today)
+        })
+      })
+      describe("Controls", () => {
+        it("Has two controls built", () => {
+          expect(module.controls.length).toEqual(2)
+        })
+        describe("Small knob", () => {
+          const smallKnob: SmallKnob = module.controls[0] as SmallKnob
+
+          it("Has the correct UUID", () => {
+            expect(smallKnob.id).toEqual("sk-id")
+          })
+          it("Points to the correct parameter", () => {
+            expect(smallKnob.payload.target.id).toEqual("param-id")
+          })
+        })
+        describe("Port", () => {
+          const port: Port = module.controls[1] as Port
+
+          it("Has the correct UUID", () => {
+            expect(port.id).toEqual("p-id")
+          })
+          it("Points to the correct parameter", () => {
+            expect(port.payload.target.id).toEqual("input-id")
+          })
         })
       })
     })
