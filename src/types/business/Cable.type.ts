@@ -1,4 +1,4 @@
-import type { Port } from "./Port.type.js"
+import type { Port } from "./Control.type.js"
 
 /**
  * A cable is a link between two modules, connected by specified ports. It is not a link between

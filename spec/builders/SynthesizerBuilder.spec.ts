@@ -58,7 +58,8 @@ describe("SynthesizerBuilder", () => {
         ],
         controls: [
           { id: "sk-id", component: "SmallKnob", payload: { x: 0, y: 0, target: "gain", label: "SK" } },
-          { id: "p-id", component: "Port", payload: { x: 0, y: 0, target: "input", label: "IN" } }
+          { id: "p-id-1", component: "Port", payload: { x: 0, y: 0, target: "input", label: "IN" } },
+          { id: "p-id-2", component: "Port", payload: { x: 0, y: 0, target: "port", label: "IN" } },
         ]
       }]
     }
@@ -215,8 +216,8 @@ describe("SynthesizerBuilder", () => {
         })
       })
       describe("Controls", () => {
-        it("Has two controls built", () => {
-          expect(module.controls.length).toEqual(2)
+        it("Has three controls built", () => {
+          expect(module.controls.length).toEqual(3)
         })
         describe("Small knob", () => {
           const smallKnob: SmallKnob = module.controls[0] as SmallKnob
@@ -232,7 +233,7 @@ describe("SynthesizerBuilder", () => {
           const port: Port = module.controls[1] as Port
 
           it("Has the correct UUID", () => {
-            expect(port.id).toEqual("p-id")
+            expect(port.id).toEqual("p-id-1")
           })
           it("Points to the correct parameter", () => {
             expect(port.payload.target.id).toEqual("input-id")
@@ -248,10 +249,10 @@ describe("SynthesizerBuilder", () => {
         expect(cable.id).toEqual("cable-id")
       })
       it("Points to the correct origin", () => {
-        expect(cable.from.id).toEqual("port-id")
+        expect(cable.from.id).toEqual("p-id-2")
       })
       it("Points the the correct destination", () => {
-        expect(cable.to.id).toEqual("input-id")
+        expect(cable.to.id).toEqual("p-id-1")
       })
     })
 
