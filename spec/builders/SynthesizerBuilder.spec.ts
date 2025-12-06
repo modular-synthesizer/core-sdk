@@ -254,6 +254,12 @@ describe("SynthesizerBuilder", () => {
       it("Points the the correct destination", () => {
         expect(cable.to.id).toEqual("p-id-1")
       })
+      it("Backtracks to the origin port", () => {
+        expect(cable.from.cable?.id).toEqual("cable-id")
+      })
+      it("Backtracks to the destination port", () => {
+        expect(cable.to.cable?.id).toEqual("cable-id")
+      })
     })
 
     describe("Ports", () => {

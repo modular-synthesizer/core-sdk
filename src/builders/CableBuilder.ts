@@ -10,9 +10,12 @@ export function CableBuilder(data: ApiCable, modules: Record<string, Module>): C
   const controlTo: PortControl = modules[data.to.module].controls.find(
     c => c.payload.target.name === data.to.port
   ) as PortControl
-  return {
+  const cable: Cable = {
     id: data.id,
     from: controlFrom, 
     to: controlTo,
   }
+  if (controlFrom) controlFrom.cable = cable
+  if (controlTo) controlTo.cable = cable
+  return cable
 }
