@@ -6,10 +6,10 @@ export function ControlBuilder(data: ApiControl, module: Module): Control | unde
   const c = data.component
   if (c === "SmallKnob" || c === "Knob" || c === "LargeKnob") {
     const target: string = `${data.payload.target}`
-    return { component: c, id: data.id, payload: { ...data.payload, target: module.parameters[target] } }
+    return { component: c, id: data.id, payload: { ...data.payload, target: module.parameters[target] }, module }
   }
   if (c === 'Port') {
     const target: string = `${data.payload.target}`
-    return { component: c, id: data.id, payload: { ...data.payload, target: module.ports[target] } }
+    return { component: c, id: data.id, payload: { ...data.payload, target: module.ports[target] }, module }
   }
 }

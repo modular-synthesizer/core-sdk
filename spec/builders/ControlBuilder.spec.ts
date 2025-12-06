@@ -16,7 +16,7 @@ describe("ControlBuilder", async () => {
     ],
     links: [],
     ports: [
-      await PortFactory({ target: "target-one"})
+      await PortFactory({ target: "target-one" })
     ],
     parameters: [
       await Parameterfactory({ targets: ["target-one"], name: "param" }),
@@ -26,7 +26,7 @@ describe("ControlBuilder", async () => {
       { id: "small-knob-id", component: "SmallKnob", payload: { x: 10, y: 20, target: "param", label: "test" } },
       { id: 'knob-id', component: 'Knob', payload: { x: 11, y: 21, target: 'param', label: "test2" } },
       { id: "large-knob-id", component: "LargeKnob", payload: { x: 12, y: 22, target: "param", label: "test3" } },
-      { id: "port-id", component: "Port", payload: { x: 13, y: 23, target: 'port-in', label: 'IN' }}
+      { id: "port-id", component: "Port", payload: { x: 13, y: 23, target: 'port-in', label: 'IN' } }
     ]
   }
 
@@ -53,6 +53,9 @@ describe("ControlBuilder", async () => {
     it("Targets the correct parameter", () => {
       expect(smallKnob.payload.target?.id).toEqual("parameter-id")
     })
+    it("Is in the correct module", () => {
+      expect(smallKnob.module.id).toEqual("module-id")
+    })
   })
 
   describe("Knob", () => {
@@ -75,6 +78,9 @@ describe("ControlBuilder", async () => {
     })
     it("Targets the correct node", () => {
       expect(knob.payload.target?.id).toEqual("parameter-id")
+    })
+    it("Is in the correct module", () => {
+      expect(knob.module.id).toEqual("module-id")
     })
   })
 
@@ -99,6 +105,9 @@ describe("ControlBuilder", async () => {
     it("Targets the correct node", () => {
       expect(largeKnob.payload.target?.id).toEqual("parameter-id")
     })
+    it("Is in the correct module", () => {
+      expect(largeKnob.module.id).toEqual("module-id")
+    })
   })
 
   describe("Port", () => {
@@ -121,6 +130,9 @@ describe("ControlBuilder", async () => {
     })
     it("Targets the correct node", () => {
       expect(port.payload.target?.id).toEqual("port-id")
+    })
+    it("Is in the correct module", () => {
+      expect(port.module.id).toEqual("module-id")
     })
   })
 })
